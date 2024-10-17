@@ -62,4 +62,4 @@ To add dependencies for this project setup, follow these steps:
 
 By following these steps, you'll have the necessary dependencies installed and the project environment set up correctly. Let me know if you need any further assistance with your MERN stack project!
 
-   > **Note**: For detailed documentation of the code, please [visit this link](insert-link-here), or [click here](https://github.com/MrCodYrohit/mern-health/blob/main/HealthSphere%20Documentation.pdf)
+   > **Note**: For detailed documentation of the code, please [click here](https://github.com/MrCodYrohit/mern-health/blob/main/HealthSphere%20Documentation.pdf)
