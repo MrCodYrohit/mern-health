@@ -9,6 +9,7 @@
 - **React Router DOM**: Implemented for creating routes and dynamic pages.
 - **JSON Web Token (JWT)**: Used for authentication functionality.
 - **Google OAuth**: Integrated for additional authentication options.
+- **Node and Express**: Used for building the backend server and handling API requests.
 - **Redux Toolkit**: Employed for managing application state.
 - **MongoDB**: Utilized as the database for all CRUD operations.
 - **Render**: Used for deploying the application.
