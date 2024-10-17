@@ -64,6 +64,13 @@ export default function SignUp() {
           id='password'
           onChange={handleChange}
         />
+        <input
+          type='occupation'
+          placeholder='doctor or patient?'
+          className='border p-3 rounded-lg'
+          id='occupation'
+          onChange={handleChange}
+        />
 
         <button
           disabled={loading}

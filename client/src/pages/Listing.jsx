@@ -138,7 +138,8 @@ export default function Listing() {
                 {listing.labreport ? ' Available' : ' Not Available'}
               </li>
             </ul>
-            {currentUser && listing.userRef !== currentUser._id && !contact && (
+            
+            {currentUser && listing.userRef !== currentUser._id && !contact && (currentUser.occupation==="doctor" || currentUser.occupation==="Doctor" || currentUser.occupation==="DOCTOR") && (
               <button onClick={()=>setContact(true)} className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'>
                 Contact Patient
               </button>

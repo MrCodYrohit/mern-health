@@ -26,8 +26,6 @@ export default function Contact({ listing }) {
         <div className='flex flex-col gap-2'>
           <p>
             Contact <span className='font-semibold'>{patient.username}</span>{' '}
-            for{' '}
-            <span className='font-semibold'>{listing.name.toLowerCase()}</span>
           </p>
           <textarea
             name='message'
