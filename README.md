@@ -2,6 +2,42 @@
 
 **DEMO/Live Project**: For demo of the project, please [click here](https://mern-health.onrender.com/)
 
+## Technology Stack
+
+- **React**: Used for building the user interface.
+- **Tailwind CSS**: Utilized for styling the application.
+- **React Router DOM**: Implemented for creating routes and dynamic pages.
+- **JSON Web Token (JWT)**: Used for authentication functionality.
+- **Google OAuth**: Integrated for additional authentication options.
+- **Redux Toolkit**: Employed for managing application state.
+- **MongoDB**: Utilized as the database for all CRUD operations.
+- **Render**: Used for deploying the application.
+
+## Project Overview
+
+1. **Installation and Setup**:
+   - Installed React, Tailwind CSS, and React Router DOM.
+   - Configured the initial setup to create routes and dynamic pages.
+
+2. **Authentication**:
+   - Implemented authentication functionality using JSON Web Token (JWT).
+   - Integrated Google OAuth for user login.
+   - Enabled users to log in and update their username, password, email, and profile image.
+
+3. **State Management**:
+   - Used Redux Toolkit for managing the application's state.
+
+4. **CRUD Operations**:
+   - Utilized MongoDB for implementing all four CRUD operations (Create, Read, Update, Delete).
+   - Allowed users to create add new patients with parameters such as critical/not critical, medical insurance, heart rate, etc.
+
+5. **Search Functionality**:
+   - Implemented advanced search functionality.
+   - Allowed users to search by name of patient, select certain options, and sort search results by age.
+
+6. **Deployment**:
+   - Deployed the application using Render's free variant.
+
 To add dependencies for this project setup, follow these steps:
 
 1. **Create or Update `package.json`:**  
