@@ -6,15 +6,31 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { app } from '../firebase';
-import { set } from 'mongoose';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateListing() {
+  const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
     imageUrls: [],
+    name: '',
+    disease_description: '',
+    past_treatment: '',
+    type: 'critical',
+    heartrate_bpm: 1,
+    bloodpressure_mm_Hg: 1,
+    age: 20,
+    insurance_no: 0,
+    insurance: false,
+    diagnosed: false,
+    labreport: false,
   });
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   console.log(formData);
   const handleImageSubmit = (e) => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
@@ -75,12 +91,74 @@ export default function CreateListing() {
       imageUrls: formData.imageUrls.filter((_, i) => i !== index),
     });
   };
+
+  const handleChange = (e) => {
+    if (e.target.id === 'notcritical' || e.target.id === 'critical') {
+      setFormData({
+        ...formData,
+        type: e.target.id,
+      });
+    }
+
+    if (
+      e.target.id === 'diagnosed' ||
+      e.target.id === 'labreport' ||
+      e.target.id === 'insurance'
+    ) {
+      setFormData({
+        ...formData,
+        [e.target.id]: e.target.checked,
+      });
+    }
+
+    if (
+      e.target.type === 'number' ||
+      e.target.type === 'text' ||
+      e.target.type === 'textarea'
+    ) {
+      setFormData({
+        ...formData,
+        [e.target.id]: e.target.value,
+      });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (formData.imageUrls.length < 1)
+        return setError('You must upload at least one image');
+    //   if (+formData.age < +formData.insurance_no)
+    //     return setError('Insurance price must be lower than age');
+      setLoading(true);
+      setError(false);
+      const res = await fetch('/api/listing/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          userRef: currentUser._id,
+        }),
+      });
+      const data = await res.json();
+      setLoading(false);
+      if (data.success === false) {
+        setError(data.message);
+      }
+      navigate(`/listing/${data._id}`);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
   return (
     <main className='p-3 max-w-4xl mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>
-        Create a Listing
+        Add a Patient
       </h1>
-      <form className='flex flex-col sm:flex-row gap-4'>
+      <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row gap-4'>
         <div className='flex flex-col gap-4 flex-1'>
           <input
             type='text'
@@ -88,96 +166,142 @@ export default function CreateListing() {
             className='border p-3 rounded-lg'
             id='name'
             maxLength='62'
-            minLength='10'
+            minLength='2'
             required
+            onChange={handleChange}
+            value={formData.name}
           />
           <textarea
             type='text'
-            placeholder='Description'
+            placeholder='Disease Description'
             className='border p-3 rounded-lg'
-            id='description'
+            id='disease_description'
             required
+            onChange={handleChange}
+            value={formData.disease_description}
           />
           <input
             type='text'
-            placeholder='Address'
+            placeholder='Past Treatment'
             className='border p-3 rounded-lg'
-            id='address'
+            id='past_treatment'
             required
+            onChange={handleChange}
+            value={formData.past_treatment}
           />
           <div className='flex gap-6 flex-wrap'>
             <div className='flex gap-2'>
-              <input type='checkbox' id='sale' className='w-5' />
-              <span>Sell</span>
+              <input
+                type='checkbox'
+                id='notcritical'
+                className='w-5'
+                onChange={handleChange}
+                checked={formData.type === 'notcritical'}
+              />
+              <span>Not Critical</span>
             </div>
             <div className='flex gap-2'>
-              <input type='checkbox' id='rent' className='w-5' />
-              <span>Rent</span>
+              <input
+                type='checkbox'
+                id='critical'
+                className='w-5'
+                onChange={handleChange}
+                checked={formData.type === 'critical'}
+              />
+              <span>Critical</span>
             </div>
             <div className='flex gap-2'>
-              <input type='checkbox' id='parking' className='w-5' />
-              <span>Parking spot</span>
+              <input
+                type='checkbox'
+                id='diagnosed'
+                className='w-5'
+                onChange={handleChange}
+                checked={formData.diagnosed}
+              />
+              <span>Diagnosed</span>
             </div>
             <div className='flex gap-2'>
-              <input type='checkbox' id='furnished' className='w-5' />
-              <span>Furnished</span>
+              <input
+                type='checkbox'
+                id='labreport'
+                className='w-5'
+                onChange={handleChange}
+                checked={formData.labreport}
+              />
+              <span>Lab Report</span>
             </div>
             <div className='flex gap-2'>
-              <input type='checkbox' id='offer' className='w-5' />
-              <span>Offer</span>
+              <input
+                type='checkbox'
+                id='insurance'
+                className='w-5'
+                onChange={handleChange}
+                checked={formData.insurance}
+              />
+              <span>Insurance</span>
             </div>
           </div>
           <div className='flex flex-wrap gap-6'>
             <div className='flex items-center gap-2'>
               <input
                 type='number'
-                id='bedrooms'
+                id='heartrate_bpm'
                 min='1'
-                max='10'
+                max='1000'
                 required
                 className='p-3 border border-gray-300 rounded-lg'
+                onChange={handleChange}
+                value={formData.heartrate_bpm}
               />
-              <p>Beds</p>
+              <p>Heart Rate (BPM)</p>
             </div>
             <div className='flex items-center gap-2'>
               <input
                 type='number'
-                id='bathrooms'
+                id='bloodpressure_mm_Hg'
                 min='1'
-                max='10'
+                max='1000'
                 required
                 className='p-3 border border-gray-300 rounded-lg'
+                onChange={handleChange}
+                value={formData.bloodpressure_mm_Hg}
               />
-              <p>Baths</p>
+              <p>Blood Pressure (mm/Hg)</p>
             </div>
             <div className='flex items-center gap-2'>
               <input
                 type='number'
-                id='regularPrice'
-                min='1'
-                max='10'
+                id='age'
+                min='0'
+                max='10000000'
                 required
                 className='p-3 border border-gray-300 rounded-lg'
+                onChange={handleChange}
+                value={formData.age}
               />
               <div className='flex flex-col items-center'>
-                <p>Regular price</p>
-                <span className='text-xs'>($ / month)</span>
+                <p>Age</p>
+                <span className='text-xs'>(Year)</span>
               </div>
             </div>
-            <div className='flex items-center gap-2'>
-              <input
-                type='number'
-                id='discountPrice'
-                min='1'
-                max='10'
-                required
-                className='p-3 border border-gray-300 rounded-lg'
-              />
-              <div className='flex flex-col items-center'>
-                <p>Discounted price</p>
-                <span className='text-xs'>($ / month)</span>
+            {formData.insurance && (
+              <div className='flex items-center gap-2'>
+                <input
+                  type='number'
+                  id='insurance_no'
+                  min='0'
+                  max='10000000'
+                  required
+                  className='p-3 border border-gray-300 rounded-lg'
+                  onChange={handleChange}
+                  value={formData.insurance_no}
+                />
+                <div className='flex flex-col items-center'>
+                  <p>Insurance No.</p>
+                  <span className='text-xs'></span>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
         <div className='flex flex-col flex-1 gap-4'>
@@ -228,9 +352,13 @@ export default function CreateListing() {
                 </button>
               </div>
             ))}
-          <button className='p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
-            Create Listing
+          <button
+            disabled={loading || uploading}
+            className='p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
+          >
+            {loading ? 'Creating...' : 'Create listing'}
           </button>
+          {error && <p className='text-red-700 text-sm'>{error}</p>}
         </div>
       </form>
     </main>
