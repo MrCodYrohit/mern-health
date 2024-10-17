@@ -55,9 +55,11 @@ To add dependencies for this project setup, follow these steps:
    ```bash
    npm run dev
 
-   > **Note**: For detailed documentation of the code, please [visit this link](insert-link-here), or [click here](https://github.com/MrCodYrohit/mern-health/blob/main/HealthSphere%20Documentation.pdf)
+
    ```
 
    This will run your backend using `nodemon`, which automatically restarts the server when changes are made.
 
 By following these steps, you'll have the necessary dependencies installed and the project environment set up correctly. Let me know if you need any further assistance with your MERN stack project!
+
+   > **Note**: For detailed documentation of the code, please [visit this link](insert-link-here), or [click here](https://github.com/MrCodYrohit/mern-health/blob/main/HealthSphere%20Documentation.pdf)
