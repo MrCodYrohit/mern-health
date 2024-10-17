@@ -28,7 +28,7 @@ Here’s how you can add the dependencies in your **HealthSphere** project setup
 
 ### Adding this to `README.md`:
 
-```
+
 # HealthSphere
 
 HealthSphere is a comprehensive platform for managing patient health data, providing real-time insights, and enabling users to access all their healthcare information in one place.
@@ -49,7 +49,7 @@ The following dependencies are required for the backend:
 To install all backend dependencies, run:
 ```bash
 npm install bcryptjs cookie-parser dotenv express jsonwebtoken mongoose nodemon
-```
+
 
 ### Frontend Dependencies
 The frontend uses React, Redux for state management, and Tailwind CSS for styling.
