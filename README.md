@@ -1,4 +1,4 @@
-Here’s how you can add the dependencies in your **HealthSphere** project setup and document them in the `README.md`:
+**HealthSphere** : Empowering Wellness Your Complete Health Hub
 
 ### Steps to Install Dependencies:
 1. Navigate to your project root directory:
@@ -26,14 +26,6 @@ Here’s how you can add the dependencies in your **HealthSphere** project setup
    cd ..
    ```
 
-### Adding this to `README.md`:
-
-
-# HealthSphere
-
-HealthSphere is a comprehensive platform for managing patient health data, providing real-time insights, and enabling users to access all their healthcare information in one place.
-
-## Project Setup
 
 ### Backend Dependencies
 The following dependencies are required for the backend:
