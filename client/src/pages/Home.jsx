@@ -52,7 +52,7 @@ export default function Home() {
         <h1 className='text-slate-700 font-bold text-3xl lg:text-6xl'>
         Empowering  <span className='text-slate-500'>Wellness</span>
           <br />
-          One Insight at a Time.
+          Your Complete Health Hub
         </h1>
         <div className='text-gray-400 text-xs sm:text-sm'>
         Your personalized health companion, providing real-time insights and seamless care management.
