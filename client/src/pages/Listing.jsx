@@ -94,7 +94,7 @@ export default function Listing() {
             <p className='text-2xl font-semibold'>
               Name: {listing.name}, Age:{' '}
               {listing.insurance
-                ? listing.insurance_no.toLocaleString('en-US')
+                ? listing.age.toLocaleString('en-US')
                 : listing.age.toLocaleString('en-US')}
               {listing.type === 'critical'}
             </p>
