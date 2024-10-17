@@ -2,6 +2,8 @@
 
 **DEMO/Live Project**: For demo of the project, please [click here](https://mern-health.onrender.com/)
 
+> **Note**: For detailed documentation of the code, please [click here](https://github.com/MrCodYrohit/mern-health/blob/main/HealthSphere%20Documentation.pdf)
+
 ## Technology Stack
 
 - **React**: Used for building the user interface.
@@ -101,4 +103,4 @@
 
 By following these steps, you'll have the necessary dependencies installed and the project environment set up correctly. Let me know if you need any further assistance with your MERN stack project!
 
-   > **Note**: For detailed documentation of the code, please [click here](https://github.com/MrCodYrohit/mern-health/blob/main/HealthSphere%20Documentation.pdf)
+ 
