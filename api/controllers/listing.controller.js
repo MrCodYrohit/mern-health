@@ -51,14 +51,64 @@ export const updateListing = async (req, res, next) => {
 };
 
 export const getListing = async (req, res, next) => {
-try {
-  const listing = await Listing.findById(req.params.id);
-  if (!listing) {
-    return next(errorHandler(404, 'Listing not found!'));
+  try {
+    const listing = await Listing.findById(req.params.id);
+    if (!listing) {
+      return next(errorHandler(404, 'Listing not found!'));
+    }
+    res.status(200).json(listing);
+  } catch (error) {
+    next(error);
   }
-  res.status(200).json(listing);
-} catch (error) {
-  next(error);
-}
+};
 
-}
+export const getListings = async (req, res, next) => {
+  try {
+    const limit = parseInt(req.query.limit) || 9;
+    const startIndex = parseInt(req.query.startIndex) || 0;
+    let insurance = req.query.insurance;
+
+    if (insurance === undefined || insurance === 'false') {
+      insurance = { $in: [false, true] };
+    }
+
+    let labreport = req.query.labreport;
+
+    if (labreport === undefined || labreport === 'false') {
+      labreport = { $in: [false, true] };
+    }
+
+    let diagnosed = req.query.diagnosed;
+
+    if (diagnosed === undefined || diagnosed === 'false') {
+      diagnosed = { $in: [false, true] };
+    }
+
+    let type = req.query.type;
+
+    if (type === undefined || type === 'all') {
+      type = { $in: ['critical', 'notcritical'] };
+    }
+
+    const searchTerm = req.query.searchTerm || '';
+
+    const sort = req.query.sort || 'createdAt';
+
+    const order = req.query.order || 'desc';
+
+    const listings = await Listing.find({
+      name: { $regex: searchTerm, $options: 'i' },
+      insurance,
+      labreport,
+      diagnosed,
+      type,
+    })
+      .sort({ [sort]: order })
+      .limit(limit)
+      .skip(startIndex);
+
+    return res.status(200).json(listings);
+  } catch (error) {
+    next(error);
+  }
+};
