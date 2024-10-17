@@ -128,8 +128,8 @@ export default function CreateListing() {
     try {
       if (formData.imageUrls.length < 1)
         return setError('You must upload at least one image');
-    //   if (+formData.age < +formData.insurance_no)
-    //     return setError('Insurance price must be lower than age');
+      // if (+formData.age < +formData.insurance_no)
+      //   return setError('Insurance price must be lower than age');
       setLoading(true);
       setError(false);
       const res = await fetch('/api/listing/create', {
