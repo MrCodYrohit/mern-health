@@ -1,6 +1,6 @@
 **HealthSphere** : Empowering Wellness Your Complete Health Hub
 
- **DEMO/Live Project**: For demo of the project, please [click here](https://github.com/MrCodYrohit/mern-health/blob/main/HealthSphere%20Documentation.pdf](https://mern-health.onrender.com/)
+**DEMO/Live Project**: For demo of the project, please [click here](https://mern-health.onrender.com/)
 
 To add dependencies for this project setup, follow these steps:
 
