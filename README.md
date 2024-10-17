@@ -1,6 +1,6 @@
 **HealthSphere** : Empowering Wellness Your Complete Health Hub
 
-To add these dependencies to your project setup, follow these steps:
+To add dependencies for this project setup, follow these steps:
 
 1. **Create or Update `package.json`:**  
    If you already have a `package.json` file, make sure it matches the one you provided. If not, create the file and copy the contents into it.
